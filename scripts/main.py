@@ -46,7 +46,7 @@ def get_sd_log():
         return "test log"
     else:
         # 取文件sd.log的最后300行
-        filepath = "./sd1.log"
+        filepath = "./sd.log"
         # 判断文件是否存在
         if not os.path.exists(filepath):
             return "sd.log文件不存在"
