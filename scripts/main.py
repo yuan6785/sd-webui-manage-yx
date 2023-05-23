@@ -89,10 +89,10 @@ def on_ui_tabs():
         html = gr.HTML("")
         # 绑定按钮事件
         btn.click(get_sd_log, inputs=[], outputs=[html])
-        # 重启服务按钮
-        btn_reboot = gr.Button(value="重启服务")
-        # 绑定按钮事件
-        btn_reboot.click(reboot_sd, inputs=[], outputs=[])
+        # # 重启服务按钮
+        # btn_reboot = gr.Button(value="重启服务")
+        # # 绑定按钮事件
+        # btn_reboot.click(reboot_sd, inputs=[], outputs=[])
 
 
     return [(depth_lib_1, "Yx Test", "depth_lib_1")]  # 界面上的选项
