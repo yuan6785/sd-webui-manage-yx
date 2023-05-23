@@ -5,8 +5,12 @@ import os
 import io
 import json
 import gradio as gr
-
-yx_debug = True
+# 判断mac还是linux系统
+import platform
+if platform.system() == 'Darwin':
+    yx_debug = True
+elif platform.system() == 'Linux':
+    yx_debug = False
 
 if not yx_debug:
     import modules.scripts as scripts
@@ -37,22 +41,40 @@ def welcome(name):
     return f"Welcome to Gradio, {name}!"
 
 
+def get_sd_log():
+    if yx_debug:
+        return "test log"
+    else:
+        # 取文件sd.log的最后300行
+        filepath = "./sd.log"
+        count = 300
+        with open(filepath, "r") as f:
+            lines = f.readlines()
+            lines = lines[-count:]
+            lines = "<br/>".join(lines)
+            return lines
+
+
 def on_ui_tabs():
     with gr.Blocks(analytics_enabled=False) as depth_lib_1:
-        gr.Markdown(
-            """
-        # Hello World!
-        Start typing below to see the output.
-        """)
-        inp = gr.Textbox(placeholder="What is your name?")
-        out = gr.Textbox()
-        # inp.change(welcome, inp, out)
-        # 创建按钮
-        btn = gr.Button(value="提交")
-        # 绑定按钮事件
-        btn.click(welcome, inputs=[inp], outputs=[out])
+        # if 0: # 测试
+        #     gr.Markdown(
+        #         """
+        #     # Hello World!
+        #     Start typing below to see the output.
+        #     """)
+        #     inp = gr.Textbox(placeholder="What is your name?")
+        #     out = gr.Textbox()
+        #     # inp.change(welcome, inp, out)
+        #     # 创建按钮
+        #     btn = gr.Button(value="提交")
+        #     # 绑定按钮事件
+        #     btn.click(welcome, inputs=[inp], outputs=[out])
         # 用于显示日志的html框
-        gr.HTML("fsdafsdafsdafasf<br/>fdsfdsf<br/>哈哈哈佛")
+        btn = gr.Button(value="查看日志")
+        html = gr.HTML("")
+        # 绑定按钮事件
+        btn.click(get_sd_log, inputs=[], outputs=[html])
 
     return [(depth_lib_1, "Yx Test", "depth_lib_1")]  # 界面上的选项
 
