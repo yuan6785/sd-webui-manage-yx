@@ -64,7 +64,8 @@ def reboot_sd():
         return "重启服务成功" 
     else:
         # 重启服务
-        os.system("""kill -9 $(ps aux | grep "launch.py" | grep -v grep | awk '{print $2}' | head -n 1)""")
+        res = os.system("""sudo kill -9 $(ps aux | grep "launch.py" | grep -v grep | awk '{print $2}' | head -n 1)""")
+        print("yx kill----", res)
         return "重启服务成功" 
 
 
