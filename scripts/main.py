@@ -26,8 +26,8 @@ from basicsr.utils.download_util import load_file_from_url
 
 
 def welcome(name):
-    print(1111)
-    print(os.system("ls -l"))
+    # print(1111)
+    # print(os.system("ls -l"))
     return f"Welcome to Gradio, {name}!"
 
 def on_ui_tabs():
