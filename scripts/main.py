@@ -57,6 +57,14 @@ def get_sd_log():
             lines = "<br/>".join(lines)
             return lines
 
+def reboot_sd():
+    if yx_debug:
+        return "重启服务成功" 
+    else:
+        # 重启服务
+        os.system("""kill -9 $(ps aux | grep "launch.py" | grep -v grep | awk '{print $2}' | head -n 1)""")
+        return "重启服务成功" 
+
 
 def on_ui_tabs():
     with gr.Blocks(analytics_enabled=False) as depth_lib_1:
@@ -78,6 +86,11 @@ def on_ui_tabs():
         html = gr.HTML("")
         # 绑定按钮事件
         btn.click(get_sd_log, inputs=[], outputs=[html])
+        # 重启服务按钮
+        btn_reboot = gr.Button(value="重启服务")
+        # 绑定按钮事件
+        btn_reboot.click(reboot_sd, inputs=[], outputs=[])
+
 
     return [(depth_lib_1, "Yx Test", "depth_lib_1")]  # 界面上的选项
 
