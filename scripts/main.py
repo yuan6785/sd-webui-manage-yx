@@ -46,10 +46,12 @@ def get_sd_log():
         return "test log"
     else:
         # 取文件sd.log的最后300行
-        filepath = "/var/log/sdwebui/sd.log"
+        filepath = "./sd.log"
         # 判断文件是否存在
         if not os.path.exists(filepath):
-            return "sd.log文件不存在"
+            filepath = "/var/log/sdwebui/sd.log"
+            if not os.path.exists(filepath):
+                return "sd.log文件不存在"
         count = 300
         with open(filepath, "r") as f:
             lines = f.readlines()
