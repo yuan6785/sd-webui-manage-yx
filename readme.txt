@@ -7,6 +7,9 @@ gradio.html可以自由些html，嵌套iframe等
 
 https://github.com/gradio-app/gradio/discussions/2932   js文件加载
 
+https://discuss.huggingface.co/t/how-to-serve-an-html-file/33921   fastapi中gradio用js文件
+
+如何使用js文件参考这个项目  https://github.com/jexom/sd-webui-depth-lib/blob/main/scripts/main.py
 
 
 下面是一个定制html的例子
