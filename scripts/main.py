@@ -60,6 +60,9 @@ def get_sd_log():
             return lines
 
 def reboot_sd():
+    """
+    @des: only ecs, not aliyun-fc
+    """
     if yx_debug:
         return "重启服务成功" 
     else:
