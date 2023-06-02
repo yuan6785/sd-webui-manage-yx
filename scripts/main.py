@@ -98,7 +98,7 @@ def on_ui_tabs():
         # btn_reboot.click(reboot_sd, inputs=[], outputs=[])
 
 
-    return [(depth_lib_1, "服务器管理", "depth_lib_1")]  # 界面上的选项
+    return [(depth_lib_1, "server manage", "depth_lib_1")]  # 界面上的选项
 
 
 if not yx_debug:
