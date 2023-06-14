@@ -64,6 +64,15 @@ def get_sd_log():
             return lines
 
 def keep_alive():
+    """
+    浏览器每隔5分钟请求一次这个api，保活
+    ---------浏览器设置不要释放云函数
+    function ClickConnect() {
+        console.log("Working"); 
+        document.getElementById("component-2000").click()
+    }
+    setInterval(ClickConnect, 30*1000)
+    """
     return f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} 保活成功"
 
 def reboot_sd():
