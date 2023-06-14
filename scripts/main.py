@@ -70,10 +70,16 @@ def reboot_sd():
         return "重启服务成功" 
     else:
         # 重启服务
-        res = os.system("""kill -9 $(ps aux | grep "launch.py" | grep -v grep | awk '{print $2}' | head -n 1)""")
-        print("yx kill----", res)
-        time.sleep(5)
-        return f"重启服务成功,{res}" 
+        if 0:
+            res = os.system("""kill -9 $(ps aux | grep "launch.py" | grep -v grep | awk '{print $2}' | head -n 1)""")
+            print("yx kill----", res)
+            time.sleep(5)
+            return f"重启服务成功,{res}" 
+        if 1:
+            # python增长内存来实现重启
+            memory = []
+            while True:
+                memory.append(' ' * 1000000)
 
 
 def on_ui_tabs():
