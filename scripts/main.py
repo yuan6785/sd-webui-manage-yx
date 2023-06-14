@@ -7,6 +7,7 @@ import json
 import gradio as gr
 # 判断mac还是linux系统
 import platform
+import time
 if platform.system() == 'Darwin':
     yx_debug = True
 elif platform.system() == 'Linux':
@@ -69,7 +70,7 @@ def reboot_sd():
         # 重启服务
         res = os.system("""kill -9 $(ps aux | grep "launch.py" | grep -v grep | awk '{print $2}' | head -n 1)""")
         print("yx kill----", res)
-        return "重启服务成功" 
+        return f"重启服务成功,{res}" 
 
 
 def on_ui_tabs():
@@ -92,10 +93,12 @@ def on_ui_tabs():
         html = gr.HTML("")
         # 绑定按钮事件
         btn.click(get_sd_log, inputs=[], outputs=[html])
-        # # 重启服务按钮
-        # btn_reboot = gr.Button(value="重启服务")
-        # # 绑定按钮事件
-        # btn_reboot.click(reboot_sd, inputs=[], outputs=[])
+        # 重启服务按钮
+        btn_reboot = gr.Button(value="重启服务")
+        # 重启日志输出
+        html_reboot = gr.HTML("")
+        # 绑定按钮事件
+        btn_reboot.click(reboot_sd, inputs=[], outputs=[html_reboot])
 
 
     return [(depth_lib_1, "server manage", "depth_lib_1")]  # 界面上的选项
