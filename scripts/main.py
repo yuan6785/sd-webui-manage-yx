@@ -70,6 +70,7 @@ def reboot_sd():
         # 重启服务
         res = os.system("""kill -9 $(ps aux | grep "launch.py" | grep -v grep | awk '{print $2}' | head -n 1)""")
         print("yx kill----", res)
+        time.sleep(5)
         return f"重启服务成功,{res}" 
 
 
