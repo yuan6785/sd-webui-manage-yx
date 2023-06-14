@@ -8,6 +8,7 @@ import gradio as gr
 # 判断mac还是linux系统
 import platform
 import time
+import datetime
 if platform.system() == 'Darwin':
     yx_debug = True
 elif platform.system() == 'Linux':
@@ -62,6 +63,9 @@ def get_sd_log():
             lines = "<br/>".join(lines)
             return lines
 
+def keep_alive():
+    return f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')} 保活成功"
+
 def reboot_sd():
     """
     @des: only ecs, not aliyun-fc
@@ -97,17 +101,25 @@ def on_ui_tabs():
         #     btn = gr.Button(value="提交")
         #     # 绑定按钮事件
         #     btn.click(welcome, inputs=[inp], outputs=[out])
-        # 用于显示日志的html框
-        btn = gr.Button(value="查看日志")
-        html = gr.HTML("")
-        # 绑定按钮事件
-        btn.click(get_sd_log, inputs=[], outputs=[html])
-        # 重启服务按钮
-        btn_reboot = gr.Button(value="重启服务")
-        # 重启日志输出
-        html_reboot = gr.HTML("")
-        # 绑定按钮事件
-        btn_reboot.click(reboot_sd, inputs=[], outputs=[html_reboot])
+        if 1:
+            # 用于显示日志的html框
+            btn = gr.Button(value="查看日志")
+            html = gr.HTML("")
+            # 绑定按钮事件
+            btn.click(get_sd_log, inputs=[], outputs=[html])
+        if 1:
+            # 用于显示日志的html框
+            btn2 = gr.Button(value="保活")
+            html2 = gr.HTML("")
+            # 绑定按钮事件
+            btn2.click(keep_alive, inputs=[], outputs=[html2])
+        if 1:
+            # 重启服务按钮
+            btn_reboot = gr.Button(value="重启服务")
+            # 重启日志输出
+            html_reboot = gr.HTML("")
+            # 绑定按钮事件
+            btn_reboot.click(reboot_sd, inputs=[], outputs=[html_reboot])
 
 
     return [(depth_lib_1, "server manage", "depth_lib_1")]  # 界面上的选项
