@@ -52,7 +52,9 @@ def get_sd_log():
         if not os.path.exists(filepath):
             filepath = "/var/log/sdwebui/sd.log"
             if not os.path.exists(filepath):
-                return "sd.log文件不存在"
+                filepath = "/var/log/sdwebui.log"
+                if not os.path.exists(filepath):
+                    return "sd.log文件不存在"
         count = 300
         with open(filepath, "r") as f:
             lines = f.readlines()
