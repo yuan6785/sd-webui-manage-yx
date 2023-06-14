@@ -170,7 +170,7 @@ def on_ui_tabs():
             greet_btn1.click(fn=None, inputs=[
                             text_input1], outputs=None, _js=get_window_url_params, api_name="greet1fds312")
             # demo加载的时候执行js函数
-            demo.load(fn=None, inputs=[text_input1],
+            depth_lib_1.load(fn=None, inputs=[text_input1],
                     outputs=None,  _js=get_window_url_params)
         if 1:
             # 重启服务按钮
