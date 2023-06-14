@@ -64,7 +64,7 @@ if 1:  # 日志获取
                 lines = "<br/>".join(lines)
                 return lines
 
-if 1:  # 保活
+if 1:  # 保活:  会导致前端页面报错 Uncaught (in promise) TypeError: Cannot read ，但不影响啥
     get_window_url_params = """
 function(keep_alive_minutes) {
     // 先清理先前的循环任务--windown.var表示全局变量
