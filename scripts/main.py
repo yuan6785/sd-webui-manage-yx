@@ -155,7 +155,7 @@ def on_ui_tabs():
             html = gr.HTML("")
             # 绑定按钮事件
             btn.click(get_sd_log, inputs=[], outputs=[html])
-        if 1:
+        if 0: # 保活:  会导致前端页面报错 Uncaught (in promise) TypeError: Cannot read ，但不影响啥
             # input
             text_input1 = gr.Textbox(lines=1, label="保活时间(分钟),默认15分钟,最大不超过120分钟")
             text_output1 = gr.Textbox(lines=1, label="保活输出")
@@ -172,7 +172,7 @@ def on_ui_tabs():
             # demo加载的时候执行js函数
             depth_lib_1.load(fn=None, inputs=[text_input1],
                     outputs=None,  _js=get_window_url_params)
-        if 1:
+        if 0:
             # 重启服务按钮
             btn_reboot = gr.Button(value="重启服务")
             # 重启日志输出
