@@ -1,7 +1,7 @@
 """
 pyenv activate py3.11_virtualenv_test
 """
-from public import *
+from .public import *
 
 def on_ui_tabs():
     with gr.Blocks(analytics_enabled=False) as depth_lib_1:
