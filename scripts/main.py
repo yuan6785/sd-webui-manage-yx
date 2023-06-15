@@ -45,6 +45,15 @@ def welcome(name):
 
 
 if 1:  # 日志获取
+    getlog_js = """
+function(){
+    var link = document.getElementById('yxyxyx_viewlog_hreda111');
+    var currentHost = window.location.host;
+    var currentProtocol = window.location.protocol;
+    link.href = currentProtocol + '//' + currentHost; //'http://localhost:7860'
+}
+"""
+
     def get_sd_log():
         if yx_debug:
             return "test log"
@@ -113,7 +122,6 @@ function(keep_alive_minutes) {
         return f"保活时间到期，停止保活: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
 
 if 1:  # 重启
-
     def reboot_sd():
         """
         @des: 如果sd是后台启动，则只重启sd，不重启云函数实例
@@ -172,6 +180,12 @@ def on_ui_tabs():
             html = gr.HTML("")
             # 绑定按钮事件
             btn.click(get_sd_log, inputs=[], outputs=[html])
+        if 1:
+            # 用于显示日志的html框
+            html1 = gr.HTML("""
+            <a id="yxyxyx_viewlog_hreda111" href='.' target='_blank'>查看日志(新标签页)</a>
+            """)
+            depth_lib_1.load(_js=getlog_js)
         if 1: # 保活:  会导致前端页面报错 Uncaught (in promise) TypeError: Cannot read ，但不影响啥
             # input
             text_input1 = gr.Textbox(lines=1, label="保活时间(分钟),默认15分钟,最大不超过120分钟")
@@ -196,14 +210,13 @@ def on_ui_tabs():
             html_reboot = gr.HTML("")
             # 绑定按钮事件
             btn_reboot.click(reboot_sd, inputs=[], outputs=[html_reboot])
-        
         if 1:
             # 重启服务按钮
             btn_reboot1 = gr.Button(value="重启实例")
             # 重启日志输出
             html_reboot1 = gr.HTML("")
             # 绑定按钮事件
-            btn_reboot.click(reboot_sd_instance, inputs=[], outputs=[html_reboot1])
+            btn_reboot1.click(reboot_sd_instance, inputs=[], outputs=[html_reboot1])
 
     return [(depth_lib_1, "server manage", "depth_lib_1")]  # 界面上的选项
 
