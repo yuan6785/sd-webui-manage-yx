@@ -1,7 +1,7 @@
 """
 pyenv activate py3.11_virtualenv_test
 """
-from .public import *
+from scripts.public import *
 
 
 def on_ui_tabs():
