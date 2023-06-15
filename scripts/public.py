@@ -146,10 +146,11 @@ if 1:  # 重启
                     return f"{output} {kill_output}"
                 else: # 直接docker的最后卡住命令启动的
                     # python增长内存来实现重启
-                    memory = []
-                    while True:
-                        memory.append(' ' * 1000000)
+                    # memory = []
+                    # while True:
+                    #     memory.append(' ' * 1000000)
                     # return f"{output} 实例重启"
+                    return f"无supervisor启动的sd，无法重启"
             
 
     def reboot_sd_instance():
