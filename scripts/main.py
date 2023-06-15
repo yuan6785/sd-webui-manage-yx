@@ -1,7 +1,8 @@
 """
 pyenv activate py3.11_virtualenv_test
 """
-from scripts.main_supervisor2 import *
+# from scripts.main_supervisor2 import *
+from scripts.main_finally import *
 
 
 if not yx_debug:
