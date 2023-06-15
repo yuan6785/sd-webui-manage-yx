@@ -50,7 +50,7 @@ function(){
     var link = document.getElementById('yxyxyx_viewlog_hreda111');
     var currentHost = window.location.host;
     var currentProtocol = window.location.protocol;
-    link.href = currentProtocol + '//' + currentHost; //'http://localhost:7860'
+    link.href = currentProtocol + '//' + currentHost + '/psuperfaa/getlog'; //'http://localhost:7860'
 }
 """
 
@@ -174,7 +174,7 @@ def on_ui_tabs():
         #     btn = gr.Button(value="提交")
         #     # 绑定按钮事件
         #     btn.click(welcome, inputs=[inp], outputs=[out])
-        if 1:
+        if 0:
             # 用于显示日志的html框
             btn = gr.Button(value="查看日志")
             html = gr.HTML("")
@@ -205,14 +205,14 @@ def on_ui_tabs():
                     outputs=None,  _js=get_window_url_params)
         if 1:
             # 重启服务按钮
-            btn_reboot = gr.Button(value="重启服务")
+            btn_reboot = gr.Button(value="重启服务(重启后请刷新浏览器)")
             # 重启日志输出
             html_reboot = gr.HTML("")
             # 绑定按钮事件
             btn_reboot.click(reboot_sd, inputs=[], outputs=[html_reboot])
         if 1:
             # 重启服务按钮
-            btn_reboot1 = gr.Button(value="重启实例")
+            btn_reboot1 = gr.Button(value="重启实例(重启后请刷新浏览器)")
             # 重启日志输出
             html_reboot1 = gr.HTML("")
             # 绑定按钮事件
