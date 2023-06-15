@@ -138,12 +138,12 @@ if 1:  # 重启
                     print("命令输出：", output)  # 命令输出： b'183273\n'
                 except subprocess.CalledProcessError as e:
                     print("命令执行错误:", e)
-                if not output: # 如果是supervisor启动的
+                if output: # 如果是supervisor启动的
                     # 杀死launch.py, supervisor会自动重启
                     command1 = """kill -9 $(ps aux | grep "launch.py" | grep -v grep | awk '{print $2}' | head -n 1)"""
                     kill_output = subprocess.check_output(command1, shell=True)
                     print(f"重启sd进程:", kill_output)
-                    return f"{output} {kill_output}"
+                    return f"重启成功: {output} {kill_output}"
                 else: # 直接docker的最后卡住命令启动的
                     # python增长内存来实现重启
                     # memory = []
