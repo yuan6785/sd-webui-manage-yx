@@ -143,11 +143,14 @@ if 1:  # 重启
                     kill_output = subprocess.check_output(
                     """kill -9 $(ps aux | grep "launch.py" | grep -v grep | awk '{print $2}' | head -n 1)""")
                     print(f"重启sd进程:", kill_output)
+                    return f"{output} {kill_output}"
                 else: # 直接docker的最后卡住命令启动的
                     # python增长内存来实现重启
                     memory = []
                     while True:
                         memory.append(' ' * 1000000)
+                    # return f"{output} 实例重启"
+            
 
     def reboot_sd_instance():
         """
