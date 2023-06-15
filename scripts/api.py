@@ -1,5 +1,7 @@
 """
 可以参考dreambooth和controlnet的api.py
+
+/docs可以看到api调用方式
 """
 from typing import Union
 
