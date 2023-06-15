@@ -9,6 +9,7 @@ import gradio as gr
 import platform
 import time
 import datetime
+import subprocess
 if platform.system() == 'Darwin':
     yx_debug = True
 elif platform.system() == 'Linux':
@@ -121,13 +122,32 @@ if 1:  # 重启
             return "重启服务成功"
         else:
             # 重启服务
-            if 0:
+            if 1:
+                # 判断有没有supervisor进程,有的话杀死launch.py, 会自动重启
+                command = 'ps aux | grep "supervisord" | grep -v grep | awk \'{print $2}\' | head -n 1'
+                try:
+                    output = subprocess.check_output(command, shell=True)
+                    print("命令输出：", output)  # 命令输出： b'183273\n'
+                except subprocess.CalledProcessError as e:
+                    print("命令执行错误:", e)
+                if output: # 如果是supervisor启动的
+                    # 杀死launch.py, supervisor会自动重启
+                    kill_output = subprocess.check_output(
+                    """kill -9 $(ps aux | grep "launch.py" | grep -v grep | awk '{print $2}' | head -n 1)""")
+                    print(f"重启sd进程:", kill_output)
+                else: # 直接docker的最后卡住命令启动的
+                    # python增长内存来实现重启
+                    memory = []
+                    while True:
+                        memory.append(' ' * 1000000)
+                
+            if 0:# ps aux | grep "supervisord" | grep -v grep | awk '{print $2}' | head -n 1
                 res = os.system(
                     """kill -9 $(ps aux | grep "launch.py" | grep -v grep | awk '{print $2}' | head -n 1)""")
                 print("yx kill----", res)
                 time.sleep(5)
                 return f"重启服务成功,{res}"
-            if 1:
+            if 0:
                 # python增长内存来实现重启
                 memory = []
                 while True:
