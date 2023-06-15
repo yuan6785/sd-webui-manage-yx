@@ -116,7 +116,7 @@ if 1:  # 重启
 
     def reboot_sd():
         """
-        @des: only ecs, not aliyun-fc
+        @des: 如果sd是后台启动，则只重启sd，不重启云函数实例
         """
         if yx_debug:
             return "重启服务成功"
@@ -140,18 +140,15 @@ if 1:  # 重启
                     memory = []
                     while True:
                         memory.append(' ' * 1000000)
-                
-            if 0:# ps aux | grep "supervisord" | grep -v grep | awk '{print $2}' | head -n 1
-                res = os.system(
-                    """kill -9 $(ps aux | grep "launch.py" | grep -v grep | awk '{print $2}' | head -n 1)""")
-                print("yx kill----", res)
-                time.sleep(5)
-                return f"重启服务成功,{res}"
-            if 0:
-                # python增长内存来实现重启
-                memory = []
-                while True:
-                    memory.append(' ' * 1000000)
+
+    def reboot_sd_instance():
+        """
+        @des: 重启云函数实例
+        """
+        memory = []
+        while True:
+            memory.append(' ' * 1000000)
+            
 
 
 def on_ui_tabs():
@@ -175,7 +172,7 @@ def on_ui_tabs():
             html = gr.HTML("")
             # 绑定按钮事件
             btn.click(get_sd_log, inputs=[], outputs=[html])
-        if 0: # 保活:  会导致前端页面报错 Uncaught (in promise) TypeError: Cannot read ，但不影响啥
+        if 1: # 保活:  会导致前端页面报错 Uncaught (in promise) TypeError: Cannot read ，但不影响啥
             # input
             text_input1 = gr.Textbox(lines=1, label="保活时间(分钟),默认15分钟,最大不超过120分钟")
             text_output1 = gr.Textbox(lines=1, label="保活输出")
@@ -192,13 +189,21 @@ def on_ui_tabs():
             # demo加载的时候执行js函数
             depth_lib_1.load(fn=None, inputs=[text_input1],
                     outputs=None,  _js=get_window_url_params)
-        if 0:
+        if 1:
             # 重启服务按钮
             btn_reboot = gr.Button(value="重启服务")
             # 重启日志输出
             html_reboot = gr.HTML("")
             # 绑定按钮事件
             btn_reboot.click(reboot_sd, inputs=[], outputs=[html_reboot])
+        
+        if 1:
+            # 重启服务按钮
+            btn_reboot1 = gr.Button(value="重启实例")
+            # 重启日志输出
+            html_reboot1 = gr.HTML("")
+            # 绑定按钮事件
+            btn_reboot.click(reboot_sd_instance, inputs=[], outputs=[html_reboot1])
 
     return [(depth_lib_1, "server manage", "depth_lib_1")]  # 界面上的选项
 
