@@ -42,12 +42,13 @@ def on_ui_tabs():
                 stop_btn = gr.Button("停止保活", elem_id='yxyx_keepalive_675675')
                 stop_btn.click(fn=stop_keepalive, inputs=None, outputs=[
                                 text_output1], api_name="3123123fdsfds")
+                html_not_error = gr.HTML("""""")
             greet_btn1 = gr.Button("更新保活时间", elem_id='yxyx_keepalive_12deqe')
             greet_btn1.click(fn=None, inputs=[
-                            text_input1], outputs=None, _js=get_window_url_params, api_name="greet1fds312")
+                            text_input1], outputs=[html_not_error], _js=get_window_url_params, api_name="greet1fds312")
             # demo加载的时候执行js函数
             depth_lib_1.load(fn=None, inputs=[text_input1],
-                    outputs=None,  _js=get_window_url_params)
+                    outputs=[html_not_error],  _js=get_window_url_params)
         if 0:
             # 重启服务按钮
             btn_reboot = gr.Button(value="重启服务(重启后请刷新浏览器)")
