@@ -62,5 +62,5 @@ def on_ui_tabs():
             html_reboot1 = gr.HTML("")
             # 绑定按钮事件
             btn_reboot1.click(reboot_sd_instance, inputs=[], outputs=[html_reboot1])
-
+    depth_lib_1.queue(concurrency_count=3)
     return [(depth_lib_1, "server manage", "depth_lib_1")]  # 界面上的选项
