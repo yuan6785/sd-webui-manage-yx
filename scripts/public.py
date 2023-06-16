@@ -55,21 +55,32 @@ function(){
 """
 
     gundongttiao_js = """
-async function(){
-    // 等待5秒执行, 因为btn.click(fn=get_sd_log, _js=gundongttiao_js) fn和_js是一起执行的, fn还没有返回日志的时候，_js无法获取到真实高度
-    for (var i = 0; i < 15; i++) {
-        try{
-            var logContainer = document.getElementById("logContainer");
-            logContainer.scrollTop = logContainer.scrollHeight;
-            break;
-        }catch(e){
-            // 等待1秒
-            await new Promise(r => setTimeout(r, 1000));
-            continue;
+    async function(){
+        // console.log("start--log---")
+        // 移除先前生成的logContainer----后面fn会再生成
+        var logContainer = document.getElementById("logContainer");
+        if (logContainer) {
+            logContainer.remove();
         }
+        // 重新赋值即可
+        async function set_scrollTop(){
+            for (var i = 0; i < 30; i++) {
+                try{
+                    var logContainer = document.getElementById("logContainer");
+                    logContainer.scrollTop = logContainer.scrollHeight;
+                    // console.log(logContainer.scrollHeight)
+                    break;
+                }catch(e){
+                    // console.log(1111, e)
+                    // 等待1秒
+                    await new Promise(r => setTimeout(r, 500));
+                    continue;
+                }
+            }
+        }
+        set_scrollTop() // 这里不要await，这样不用阻塞，可以在后端执行; 否则python的fn无法执行
     }
-}
-"""
+    """
 
     def get_sd_log():
         if yx_debug:
@@ -90,7 +101,6 @@ async function(){
                 lines = f.readlines()
                 lines = lines[-count:]
                 lines = "<br/>".join(lines)
-                return lines
             log += lines
             log += "</div>"
             return log
