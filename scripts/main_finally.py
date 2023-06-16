@@ -24,7 +24,7 @@ def on_ui_tabs():
             btn = gr.Button(value="查看日志")
             html = gr.HTML("")
             # 绑定按钮事件
-            btn.click(get_sd_log, inputs=[], outputs=[html], _js=gundongttiao_js)
+            btn.click(get_sd_log, inputs=[], outputs=[html])
         if 0:
             # 用于显示日志的html框
             html1 = gr.HTML("""
