@@ -59,9 +59,8 @@ function(){
     // 等待1秒执行, 因为btn.click(fn=get_sd_log, _js=gundongttiao_js) fn和_js是一起执行的, fn还没有返回日志的时候，_js无法获取到真实高度
     setTimeout(function(){
         var logContainer = document.getElementById("logContainer");
-        console.log(11111, logContainer.scrollHeight);
         logContainer.scrollTop = logContainer.scrollHeight;
-    }, 1000);
+    }, 5000);
 }
 """
 
