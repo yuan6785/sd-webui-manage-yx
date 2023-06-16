@@ -56,7 +56,7 @@ function(){
 
     gundongttiao_js = """
     async function(){
-        console.log("start--log---")
+        // console.log("start--log---")
         // 重新赋值即可
         async function set_scrollTop(){
             await new Promise(r => setTimeout(r, 3000)); // 等待fn生成日志
@@ -66,7 +66,7 @@ function(){
             }
         }
         await set_scrollTop()
-        console.log("end--log---")
+        // console.log("end--log---")
     }
     """
 
