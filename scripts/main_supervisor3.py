@@ -22,8 +22,12 @@ def on_ui_tabs():
             # 用于显示日志的html框
             btn = gr.Button(value="查看日志")
             html = gr.HTML("")
-            # 绑定按钮事件
-            btn.click(get_sd_log, inputs=[], outputs=[html], _js=gundongttiao_js)
+            with gr.Row(visible=False):
+                html_not_log_error = gr.HTML("""""")
+            # 绑定按钮事件---#参考/Users/yuanxiao/workspace/0yxgithub/userful_scripts/gradio_test/test_html_display_log.py
+            btn.click(fn=get_sd_log, inputs=[], outputs=[html])
+            btn.click(fn=None, _js=gundongttiao_js,
+                      inputs=[], outputs=[html_not_log_error])
         if 1:
             # 用于显示日志的html框
             html1 = gr.HTML("""
