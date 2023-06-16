@@ -1,5 +1,7 @@
 用于sdwebui的插件,用于sd的重启，日志查看等等
 
+基础知识点和测试参考:  /Users/yuanxiao/workspace/0yxgithub/userful_scripts/gradio_test/readme.txt
+
 
 https://gradio.app/custom-CSS-and-JS/   自定义css和js
 
