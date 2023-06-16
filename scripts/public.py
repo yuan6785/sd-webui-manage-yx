@@ -89,7 +89,7 @@ function(){
                 lines = f.readlines()
                 lines = lines[-count:]
                 lines = "<br/>".join(lines)
-                return lines
+                # return lines
             log += lines
             log += "</div>"
             return log
