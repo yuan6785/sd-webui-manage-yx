@@ -54,10 +54,22 @@ function(){
 }
 """
 
+    gundongttiao_js = """
+function(){
+    // 等待1秒执行, 因为btn.click(fn=get_sd_log, _js=gundongttiao_js) fn和_js是一起执行的, fn还没有返回日志的时候，_js无法获取到真实高度
+    setTimeout(function(){
+        var logContainer = document.getElementById("logContainer");
+        console.log(11111, logContainer.scrollHeight);
+        logContainer.scrollTop = logContainer.scrollHeight;
+    }, 1000);
+}
+"""
+
     def get_sd_log():
         if yx_debug:
             return "test log"
         else:
+            log = """ <div id="logContainer" style="height: 400px; width:100%; background-color: #f2f2f2; overflow-y: scroll;"> """
             # 取文件sd.log的最后300行
             filepath = "./sd.log"
             # 判断文件是否存在
@@ -72,7 +84,9 @@ function(){
                 lines = f.readlines()
                 lines = lines[-count:]
                 lines = "<br/>".join(lines)
-                return lines
+            log += lines
+            log += "</div>"
+            return log
 
 if 1:  # 保活:  会导致前端页面报错 Uncaught (in promise) TypeError: Cannot read ，但不影响啥
     get_window_url_params = """
