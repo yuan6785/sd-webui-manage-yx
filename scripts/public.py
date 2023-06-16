@@ -56,30 +56,17 @@ function(){
 
     gundongttiao_js = """
     async function(){
-        // console.log("start--log---")
-        // 移除先前生成的logContainer----后面fn会再生成
-        var logContainer = document.getElementById("logContainer");
-        if (logContainer) {
-            logContainer.remove();
-        }
+        console.log("start--log---")
         // 重新赋值即可
         async function set_scrollTop(){
-            for (var i = 0; i < 30; i++) {
-                try{
-                    var logContainer = document.getElementById("logContainer");
-                    logContainer.scrollTop = logContainer.scrollHeight;
-                    // console.log(logContainer.scrollHeight)
-                    break;
-                }catch(e){
-                    console.log(1111, e)
-                    // 等待1秒
-                    await new Promise(r => setTimeout(r, 500));
-                    continue;
-                }
+            await new Promise(r => setTimeout(r, 3000)); // 等待fn生成日志
+            var logContainer = document.getElementById("logContainer");
+            if (logContainer){
+                logContainer.scrollTop = logContainer.scrollHeight;
             }
         }
-        set_scrollTop() // 这里不要await，这样不用阻塞，可以在后端执行; 否则python的fn无法执行
-        // console.log("start--log---")
+        await set_scrollTop()
+        console.log("end--log---")
     }
     """
 
