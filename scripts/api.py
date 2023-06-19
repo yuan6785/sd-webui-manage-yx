@@ -25,6 +25,7 @@ def server_manage_yx_api(_: gr.Blocks, app: FastAPI):
     async def version():
         return {"version": '1.0'}
 
+# 查看日志等等也可以写到这里面，不用写到fast_main.py里面---todo
 
 try:
     import modules.script_callbacks as script_callbacks
