@@ -29,7 +29,7 @@ def on_ui_tabs():
             btn.click(fn=None, _js=gundongttiao_js,
                       inputs=[], outputs=[html_not_log_error])
         if 1:
-            # 用于显示日志的html框
+            # 用于显示日志的html框----fast_main.py
             html1 = gr.HTML("""
             <a id="yxyxyx_viewlog_hreda111" href='.' target='_blank'>查看日志(新标签页)</a>
             """)

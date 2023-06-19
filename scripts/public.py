@@ -54,6 +54,15 @@ function(){
 }
 """
 
+    getlog_js_api = """
+function(){
+    var link = document.getElementById('yxyxyx_viewlog_hreda2222');
+    var currentHost = window.location.host;
+    var currentProtocol = window.location.protocol;
+    link.href = currentProtocol + '//' + currentHost + '/servermanageyx/getlog'; //'http://localhost:7860'
+}
+"""
+
     gundongttiao_js = """
     async function(){
         // console.log("start--log---")
