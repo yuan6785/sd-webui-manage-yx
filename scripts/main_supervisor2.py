@@ -19,6 +19,12 @@ def on_ui_tabs():
         #     # 绑定按钮事件
         #     btn.click(welcome, inputs=[inp], outputs=[out])
         if 0:
+            # 用于显示日志的html框----fast_api.py
+            html_api = gr.HTML("""
+            <a id="yxyxyx_viewlog_hreda2222" href='.' target='_blank'>查看日志(新标签页)</a>
+            """)
+            depth_lib_1.load(_js=getlog_js_api)
+        if 0:
             # 用于显示日志的html框
             btn = gr.Button(value="查看日志")
             html = gr.HTML("")
