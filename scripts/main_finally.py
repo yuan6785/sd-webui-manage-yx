@@ -66,9 +66,9 @@ def on_ui_tabs():
             html_reboot = gr.HTML("")
             # 绑定按钮事件
             btn_reboot.click(reboot_sd, inputs=[], outputs=[html_reboot])
-        if 0:
+        if 1:
             # 重启服务按钮
-            btn_reboot1 = gr.Button(value="重启实例(重启后请刷新浏览器)")
+            btn_reboot1 = gr.Button(value="重启实例(重启需要一定的时间, 请刷新浏览器看是否重启成功)")
             # 重启日志输出
             html_reboot1 = gr.HTML("")
             # 绑定按钮事件
