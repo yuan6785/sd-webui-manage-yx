@@ -19,13 +19,26 @@ from modules.api import api
 from scripts import external_code
 from scripts.processor import *
 import os
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
 
 
 def server_manage_yx_api(_: gr.Blocks, app: FastAPI):
     @app.get("/servermanageyx/version")
     async def version():
         return {"version": '1.0'}
+    
+    @app.get("/servermanageyx/downloadlog")
+    async def download_log():
+        # 取文件sd.log的最后300行
+        filepath = "./sd.log"
+        # 判断文件是否存在
+        if not os.path.exists(filepath):
+            filepath = "/var/log/sdwebui/sd.log"
+            if not os.path.exists(filepath):
+                filepath = "/var/log/sdwebui.log"
+                if not os.path.exists(filepath):
+                    return "sd.log文件不存在"
+        return FileResponse(filepath, filename=os.path.basename(filepath))
 
     # 查看日志等等也可以写到这里面，不用写到fast_main.py里面
     @app.get("/servermanageyx/getlog", response_class=HTMLResponse)
