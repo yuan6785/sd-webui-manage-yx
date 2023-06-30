@@ -20,10 +20,6 @@ import os
 def on_ui_settings():
     """
     @des: 启动时候动态设置配置项
-    参考:
-    /Users/yuanxiao/workspace/0yxgithub/stable-diffusion-webui/modules/shared.py
-    参考
-    /Users/yuanxiao/workspace/0yxgithub/stable-diffusion-webui/modules/script_callbacks.py
     环境变量参考: 直接容器内读云函数环境变量 https://www.alibabacloud.com/help/zh/function-compute/latest/environment-variables
     >>> import os
     >>> os.environ.get("FC_FUNCTION_NAME", "unknown")
