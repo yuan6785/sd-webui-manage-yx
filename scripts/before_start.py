@@ -17,7 +17,7 @@ from typing import Optional, Dict, Any
 import os
 
 
-def on_ui_settings():
+def set_nas_output():
     """
     @des: 启动时候动态设置配置项
     环境变量参考: 直接容器内读云函数环境变量 https://www.alibabacloud.com/help/zh/function-compute/latest/environment-variables
@@ -56,5 +56,5 @@ def on_ui_settings():
     # print("动态设置输出路径配置项完成-------by yx")
         
 
-
-script_callbacks.on_ui_settings(on_ui_settings) 
+# 暂不启用
+# script_callbacks.on_ui_settings(set_nas_output) 
