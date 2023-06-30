@@ -19,6 +19,14 @@ def on_ui_tabs():
         #     btn = gr.Button(value="提交")
         #     # 绑定按钮事件
         #     btn.click(welcome, inputs=[inp], outputs=[out])
+        if 1:
+            # 用于获取云函数的域名
+            with gr.Row(visible=False):
+                output_domain = gr.Textbox(label="Output Box")
+            depth_lib_1.load(fn=None, inputs=None,
+                    outputs=[output_domain],  _js=getdomain_js)
+            # 当output内容改变后执行---这样后端就能获取到前端的域名了
+            output_domain.change(fn=make_domain, inputs=[output_domain], outputs=None)
         if 0:
             # 用于显示日志的html框----fast_api.py
             html_api = gr.HTML("""

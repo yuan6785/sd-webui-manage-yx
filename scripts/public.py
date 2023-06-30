@@ -17,6 +17,7 @@ elif platform.system() == 'Linux':
     yx_debug = False
 
 if not yx_debug:
+    from modules import script_callbacks, scripts, sd_hijack, shared
     import modules.scripts as scripts
     from modules import script_callbacks
     from modules.shared import opts
@@ -44,6 +45,31 @@ def welcome(name):
     # print(os.system("ls -l"))
     return f"Welcome to Gradio, {name}!"
 
+if 1: # 获取sd云函数的域名--根据域名id设置对应用户的输出文件夹
+    # 从这里/Users/yuanxiao/workspace/0yxgithub/userful_scripts/project_pre/yxpre/pre_make.py生成拷贝过来---重要---
+    domain_map_name = {"6": "chenmin", "7": "duanyi", "8": "huangzhipeng", "9": "lihai", "10": "lvxing", "11": "mahaiteng", "12": "wangjiaxin", "13": "zhaoyue", "14": "wangluo", "15": "sunfuxing", "16": "daixinxin", "17": "yangguoqing", "18": "zhaozilong", "19": "jiaokun", "20": "lijie", "21": "liyonggang", "22": "panzhonghao", "23": "yuganfeng", "24": "zhaolili", "25": "wangxiaoqing", "26": "zhanghongzhi", "27": "hehuaying", "28": "jixiaomin", "29": "lvshanshan",
+                    "30": "wangshijie", "31": "dongboyan", "32": "lixue", "33": "zhaoliang", "34": "gaohong", "35": "fengdehai", "36": "yangwenyuan", "37": "huangdannuo", "38": "liuzhenxing", "39": "zhengmingyu", "40": "lizheng", "41": "zhanglian", "42": "luzhenyu", "43": "hejie", "44": "yaozhiqian", "45": "zhangqing", "46": "jiashuting", "47": "gaiwenxing", "48": "zhangtianzi", "49": "zhangyu", "50": "wangqi", "51": "zhangwei", "52": "lifang", "53": "liangkuan", "54": "sunjian", "1":"test_yuanxiao"}
+    getdomain_js = """
+async function(xx){
+    var domain = window.location.host;
+    // await new Promise(r => setTimeout(r, 5000));
+    return domain;
+}
+"""
+    def make_domain(domain):
+        try:
+            domain_no = domain.split(".")[0].strip()
+        except:
+            domain_no = "-1"
+        username = domain_map_name.get(domain_no, "unknown")
+        outputs_root = "test_outputs"  # outputs, test_outputs
+        shared.opts.set("outdir_samples", f"")   # 系统配置选项
+        shared.opts.set("outdir_txt2img_samples", f"{outputs_root}/{username}/txt2img-images")   # 系统配置选项
+        shared.opts.set("outdir_img2img_samples", f"{outputs_root}/{username}/img2img-images")   # 系统配置选项
+        shared.opts.set("outdir_extras_samples", f"{outputs_root}/{username}/extras-images")   # 系统配置选项
+        shared.opts.set("outdir_grids", f"")   # 系统配置选项
+        shared.opts.set("outdir_txt2img_grids", f"{outputs_root}/{username}/txt2img-grids")   # 系统配置选项
+        shared.opts.set("outdir_img2img_grids", f"{outputs_root}/{username}/img2img-grids")   # 系统配置选项
 
 if 1:  # 日志获取
     getlog_js = """
