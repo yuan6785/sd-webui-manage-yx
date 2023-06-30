@@ -19,7 +19,7 @@ def on_ui_tabs():
         #     btn = gr.Button(value="提交")
         #     # 绑定按钮事件
         #     btn.click(welcome, inputs=[inp], outputs=[out])
-        if 1:
+        if 0:
             # 用于获取云函数的域名
             with gr.Row(visible=False):
                 output_domain = gr.Textbox(label="Output Box")
