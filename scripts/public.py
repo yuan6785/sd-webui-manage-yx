@@ -62,7 +62,7 @@ async function(xx){
         except:
             domain_no = "-1"
         username = domain_map_name.get(domain_no, "unknown")
-        outputs_root = "test_outputs"  # outputs, test_outputs
+        outputs_root = "outputs"  # outputs---输出到nas, test_outputs---会输出到云函数的容器文件夹下面
         shared.opts.set("outdir_samples", f"")   # 系统配置选项
         shared.opts.set("outdir_txt2img_samples", f"{outputs_root}/{username}/txt2img-images")   # 系统配置选项
         shared.opts.set("outdir_img2img_samples", f"{outputs_root}/{username}/img2img-images")   # 系统配置选项
