@@ -21,6 +21,7 @@ def set_nas_output():
     """
     @des: 启动时候动态设置配置项
     环境变量参考: 直接容器内读云函数环境变量 https://www.alibabacloud.com/help/zh/function-compute/latest/environment-variables
+    这个文档里面还可以根据python的sdk配置环境变量，可实现动态设置环境变量，如果每个人对应的域名是不固定的，就可以按这个方式来设置。
     >>> import os
     >>> os.environ.get("FC_FUNCTION_NAME", "unknown")
     'sd1'
