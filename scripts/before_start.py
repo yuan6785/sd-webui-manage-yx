@@ -15,6 +15,44 @@ from gradio import Blocks
 from fastapi import FastAPI
 from typing import Optional, Dict, Any
 import os
+from xpinyin import Pinyin
+
+
+def get_domain_by_config(domain_no):
+    """
+    @des: 从配置中心读取域名配置
+    """
+    username_pinyin = "unknown"
+    try:
+        config_sub_domain = "conf.private.playdayy.cn"
+        url = f"https://{config_sub_domain}/api/Config/app/com.playdayy.sd.serverless-enter?env=CN-PRD"
+        headers = {
+            'Authorization': 'Basic Y29tLnBsYXlkYXl5LnNkLnNlcnZlcmxlc3MtZW50ZXI6QUgxbERuejRmUyN3cDNLMw==',
+            'User-Agent': 'Apifox/1.0.0 (https://www.apifox.cn)',
+            'Accept': '/',
+            'Host': f'{config_sub_domain}',
+            'Connection': 'keep-alive'
+        }
+        retry_count = 3
+        while retry_count > 0:
+            try:
+                response = requests.get(url, headers=headers, timeout=(30, 30))
+                break
+            except:
+                retry_count -= 1
+                continue
+        # data = response.content.decode("utf-8")
+        # print(data)
+        # print(response.json()[0])
+        for item in response.json():
+            if str(item['value']) == str(domain_no):
+                username = item['key']
+                # 取拼音
+                username_pinyin = Pinyin().get_pinyin(username).replace('-', '')
+                break
+    except:
+        pass
+    return username_pinyin
 
 
 def set_nas_output():
@@ -76,8 +114,8 @@ def set_nas_output():
     print(value)
     """
     # 从这里/Users/yuanxiao/workspace/0yxgithub/userful_scripts/project_pre/yxpre/pre_make.py生成拷贝过来---重要---
-    domain_map_name = {"6": "chenmin", "7": "duanyi", "8": "huangzhipeng", "9": "lihai", "10": "lvxing", "11": "mahaiteng", "12": "wangjiaxin", "13": "zhaoyue", "14": "wangluo", "15": "sunfuxing", "16": "daixinxin", "17": "yangguoqing", "18": "zhaozilong", "19": "jiaokun", "20": "lijie", "21": "liyonggang", "22": "panzhonghao", "23": "yuganfeng", "24": "zhaolili", "25": "wangxiaoqing", "26": "zhanghongzhi", "27": "hehuaying", "28": "jixiaomin", "29": "lvshanshan",
-                    "30": "wangshijie", "31": "dongboyan", "32": "lixue", "33": "zhaoliang", "34": "gaohong", "35": "fengdehai", "36": "yangwenyuan", "37": "huangdannuo", "38": "liuzhenxing", "39": "zhengmingyu", "40": "lizheng", "41": "zhanglian", "42": "luzhenyu", "43": "hejie", "44": "yaozhiqian", "45": "zhangqing", "46": "jiashuting", "47": "gaiwenxing", "48": "zhangtianzi", "49": "zhangyu", "50": "wangqi", "51": "zhangwei", "52": "lifang", "53": "liangkuan", "54": "sunjian"}
+    # domain_map_name = {"6": "chenmin", "7": "duanyi", "8": "huangzhipeng", "9": "lihai", "10": "lvxing", "11": "mahaiteng", "12": "wangjiaxin", "13": "zhaoyue", "14": "wangluo", "15": "sunfuxing", "16": "daixinxin", "17": "yangguoqing", "18": "zhaozilong", "19": "jiaokun", "20": "lijie", "21": "liyonggang", "22": "panzhonghao", "23": "yuganfeng", "24": "zhaolili", "25": "wangxiaoqing", "26": "zhanghongzhi", "27": "hehuaying", "28": "jixiaomin", "29": "lvshanshan",
+    #                    "30": "wangshijie", "31": "dongboyan", "32": "lixue", "33": "zhaoliang", "34": "gaohong", "35": "fengdehai", "36": "yangwenyuan", "37": "huangdannuo", "38": "liuzhenxing", "39": "zhengmingyu", "40": "lizheng", "41": "zhanglian", "42": "luzhenyu", "43": "hejie", "44": "yaozhiqian", "45": "zhangqing", "46": "jiashuting", "47": "gaiwenxing", "48": "zhangtianzi", "49": "zhangyu", "50": "wangqi", "51": "zhangwei", "52": "lifang", "53": "liangkuan", "54": "sunjian"}
     # 获取当前ubuntu服务器的主机名
     try:
         # 获取环境变量FC_FUNCTION_NAME的值
@@ -91,17 +129,23 @@ def set_nas_output():
             domain_no = "-1"
     except:
         domain_no = "-1"
-    username = domain_map_name.get(domain_no, "unknown")
+    # username = domain_map_name.get(domain_no, "unknown")
+    username = get_domain_by_config(domain_no)
     outputs_root = "outputs"  # outputs---输出到nas, test_outputs---会输出到云函数的容器文件夹下面
     shared.opts.set("outdir_samples", f"")   # 系统配置选项
-    shared.opts.set("outdir_txt2img_samples", f"{outputs_root}/{username}/txt2img-images")   # 系统配置选项
-    shared.opts.set("outdir_img2img_samples", f"{outputs_root}/{username}/img2img-images")   # 系统配置选项
-    shared.opts.set("outdir_extras_samples", f"{outputs_root}/{username}/extras-images")   # 系统配置选项
+    shared.opts.set("outdir_txt2img_samples",
+                    f"{outputs_root}/{username}/txt2img-images")   # 系统配置选项
+    shared.opts.set("outdir_img2img_samples",
+                    f"{outputs_root}/{username}/img2img-images")   # 系统配置选项
+    shared.opts.set("outdir_extras_samples",
+                    f"{outputs_root}/{username}/extras-images")   # 系统配置选项
     shared.opts.set("outdir_grids", f"")   # 系统配置选项
-    shared.opts.set("outdir_txt2img_grids", f"{outputs_root}/{username}/txt2img-grids")   # 系统配置选项
-    shared.opts.set("outdir_img2img_grids", f"{outputs_root}/{username}/img2img-grids")   # 系统配置选项
+    shared.opts.set("outdir_txt2img_grids",
+                    f"{outputs_root}/{username}/txt2img-grids")   # 系统配置选项
+    shared.opts.set("outdir_img2img_grids",
+                    f"{outputs_root}/{username}/img2img-grids")   # 系统配置选项
     # print("动态设置输出路径配置项完成-------by yx")
-        
+
 
 # 暂不启用
-# script_callbacks.on_ui_settings(set_nas_output) 
+script_callbacks.on_ui_settings(set_nas_output)
