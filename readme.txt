@@ -2,6 +2,7 @@
 
 基础知识点和测试参考:  /Users/yuanxiao/workspace/0yxgithub/userful_scripts/gradio_test/readme.txt
 
+如果只是脚本扩展，不是插件，可以参考这个项目----/Users/yuanxiao/workspace/0yxgithub/stable-diffusion-webui/scripts/prompt_matrix.py
 
 https://gradio.app/custom-CSS-and-JS/   自定义css和js
 
