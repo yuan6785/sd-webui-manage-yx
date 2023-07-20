@@ -72,6 +72,7 @@ def server_manage_yx_api(_: gr.Blocks, app: FastAPI):
         return result
 
 
+
 try:
     import modules.script_callbacks as script_callbacks
 
