@@ -20,6 +20,8 @@ from scripts import external_code
 from scripts.processor import *
 import os
 from fastapi.responses import HTMLResponse, FileResponse
+# 读取运行时的数据
+from modules import script_callbacks, scripts, sd_hijack, shared
 
 
 def server_manage_yx_api(_: gr.Blocks, app: FastAPI):
@@ -58,6 +60,16 @@ def server_manage_yx_api(_: gr.Blocks, app: FastAPI):
             lines = lines[-count:]
             lines = "<br/>".join(lines)
             return lines
+    
+    @app.get("/servermanageyx/getsytlesruntime")
+    async def get_sytles_runtime():
+        result = {"styles": 'no data'}
+        try:
+            # 如果要删除styles.csv里面的内容，需要这样删除 del shared.prompt_styles.styles[name], 不可以直接删除csv的内容，无效的，需要删除运行时内存的内容
+            result = shared.prompt_styles.styles 
+        except:
+            pass
+        return result
 
 
 try:
