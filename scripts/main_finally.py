@@ -6,6 +6,13 @@ from scripts.public import *
 
 def on_ui_tabs():
     with gr.Blocks(analytics_enabled=False) as depth_lib_1:
+        if 1: # 调整其他服务的链接
+            html1 = gr.HTML("""
+            <a id="yxyxyx_viewlog_hreda111" href='https://sd.agones.playdayy.cn/psuperfaa/' target='_blank'>服务器管理页面(日志和重启)</a>
+            """)
+            html2 = gr.HTML("""
+            <a id="yxyxyx_viewlog_hreda111" href='https://minio-web.agones.playdayy.cn' target='_blank'>文件上传管理</a>
+            """)
         if 1: # 保活:  会导致前端页面报错 Uncaught (in promise) TypeError: Cannot read ，但不影响啥
             # input
             text_input1 = gr.Textbox(lines=1, label="保活时间(分钟),默认15分钟,最大不超过120分钟")
