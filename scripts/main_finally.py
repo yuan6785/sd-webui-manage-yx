@@ -9,7 +9,8 @@ def on_ui_tabs():
         if 1: # 调整其他服务的链接
             html1 = gr.HTML("""
             <font>----------------------------------------------------------------</font><br/>
-            <a id="yxyxyx_viewlog_hreda111" href='https://sd.agones.playdayy.cn/psuperfaa/' target='_blank'>服务器管理页面(日志和重启)</a><br/>
+            <a id="yxyxyx_viewlog_hreda111" href='https://sd.agones.playdayy.cn/psuperfaa/' target='_blank'>服务器管理页面(日志和重启)</a><br/><br/>
+            <font>----------------------------------------------------------------</font><br/>
             <a id="yxyxyx_viewlog_hreda111" href='https://minio-web.agones.playdayy.cn' target='_blank'>文件上传管理</a><br/>
             <font>----------------------------------------------------------------</font><br/>
             """)
