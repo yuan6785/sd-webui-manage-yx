@@ -37,7 +37,7 @@ def on_ui_tabs():
                 <font>----------------------------------------------------------------</font><br/>
                 <a id="yxyxyx_viewlog_hreda111" href='http://{real_public_ip}:9001/' target='_blank'>服务器管理页面(日志和重启)</a><br/>
                 <font>----------------------------------------------------------------</font><br/>
-                <a id="yxyxyx_viewlog_hreda111" href='http://{real_public_ip}:9003' target='_blank'>文件上传管理</a><br/>
+                <a id="yxyxyx_viewlog_hreda111" href='http://{real_public_ip}:9003' target='_blank'>文件上传管理(用户名:ecsuser 密码:ecsuserqwe)</a><br/>
                 <font>----------------------------------------------------------------</font><br/>
                 """)
     return [(depth_lib_1, "server manage", "depth_lib_1")]  # 界面上的选项
