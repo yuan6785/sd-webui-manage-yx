@@ -11,6 +11,7 @@ import gradio as gr
 import yaml
 from modules import script_callbacks, scripts, sd_hijack, shared
 import requests
+import json
 from gradio import Blocks
 from fastapi import FastAPI
 from typing import Optional, Dict, Any
@@ -65,11 +66,21 @@ def get_domain_by_config(domain_no):
         #
         if 1:
             #
-            os.environ['EZCONFIG_ENV'] = ''
-            os.environ['EZCONFIG_APPID'] =  ''
-            os.environ['EZCONFIG_SECRET'] =  ''
-            os.environ['EZCONFIG_HOST'] =  ''
-        #
+            env_config_file = "/share/sdwebui_public/public/custom_envs_config.json"
+            if os.path.exists(env_config_file):
+                with open(env_config_file, "r") as f:
+                    env_config = f.read()
+                evv_config_json = json.loads(env_config)
+            else:
+                raise Exception("env_config_file not exists")
+            #
+            sd_users_env = evv_config_json.get("sd_aliyun_func_users", {})
+            #
+            os.environ['EZCONFIG_ENV'] = sd_users_env.get("EZCONFIG_ENV", '')
+            os.environ['EZCONFIG_APPID'] =  sd_users_env.get("EZCONFIG_APPID", '')
+            os.environ['EZCONFIG_SECRET'] =  sd_users_env.get("EZCONFIG_SECRET", '')
+            os.environ['EZCONFIG_HOST'] =  sd_users_env.get("EZCONFIG_HOST", '')
+        # 这一句必须放在os.environ配置后面
         from ezconfig_client import loader
         res = loader.get_latest_config()
         # {'version': 7, 'config_data': {'userServerKV': {'张三': 27, '李四': 43, ...}, 'version': '1.0.1'}, ...}
