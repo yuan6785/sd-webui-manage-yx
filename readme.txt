@@ -1,4 +1,5 @@
 xpinyin==0.7.6
+ezconfig-client==0.5
 
 用于sdwebui的插件,用于sd的重启，日志查看等等
 
