@@ -58,7 +58,7 @@ from xpinyin import Pinyin
 
 def get_domain_by_config(domain_no):
     """
-    @des: 从ezconfig配置中心读取域名配置
+    @des: 从ezconfig配置中心读取域名配置---只用于云函数版本
           需要配置环境变量
     """
     username_pinyin = "unknown"
